@@ -1,11 +1,11 @@
 --- 
 title: Your name in lights!
-date: 2023-06-21
+date: 2026-03-21
 --- 
 
-# So you've built your 'Beast' - now what?
+# So you've built your 'Beast - now what?
 
-Building the MicroBeast is a fun and rewarding activity, but once successfully completed many 
+Building the [MicroBeast](https://feersumbeasts.com/microbeast.html) is a fun and rewarding activity, but once successfully completed many 
 users don't get much further than having a couple of games of `Zork` before relegating the Beast 
 to a dusty drawer and moving on to the next project.
 
@@ -14,7 +14,7 @@ architecture and programming in a bare-bones, close-to-the-hardware style that e
 mimics the 80s home computing boom -- something that simply isn't possible on complex 
 modern computer systems.
 
-> Why do you keep saying "`Beast ?
+> *Why do you keep saying "`Beast" ?*
 > It's an easy way for me to refer to both the MicroBeast (a kit you build yourself, which 
 > always has the LED display modules) and the NanoBeast (a pre-assembled board, where the
 > LED display modules are available as an add-on). 
@@ -48,18 +48,19 @@ which includes as its most fundamental layer the *BIOS* (Basic Input/Ouptut Syst
 which deals with the nitty-gritty of the 'Beast's specific hardware. Above that layer sits the 
 *BDOS* (Basic Disk Operating System), which provides a consistent API for accessing machine features 
 that is common across all CP/M computers: by writing code to target this API you can ensure that your 
-software will run on a wide array of PCs regardless of manufacturer. Finally at the top of the stack 
+software will run on a wide array of CP/M computers regardless of manufacturer. Finally at the top of the stack 
 is the *CCP* (Console Command Processor) which is the bit you interact with when you're typing commands 
 in to the 'Beast.
 
-The traditional advice is always to code to the BDOS and never to the BIOS to maximise the compatibility 
-of your code. We're going to ignore that advice, because we want to talk to those LED displays, and they 
-are not a standard CP/M feature.
+> The traditional advice is always to code to the BDOS and never to the BIOS in order to maximise the compatibility 
+> of your code. We're going to ignore that advice, because we want to talk to those LED displays, and they 
+> are not a standard CP/M feature.
+{: .prompt-info }
 
 ## CP/M disks 
 
 When your 'Beast boots up, you have an `A:` drive which is read-only and which includes a few programs 
-to get you started. `Zork` is one, and `MBasic` is another - it's the latter that we'll be initially.
+to get you started. `Zork` is one, and `MBasic` is another - it's the latter that we'll be initially experimenting with.
 
 Use the `dir` command to look at your A drive:
 
@@ -71,7 +72,7 @@ main drawback is that its contents will be lost if you reset the 'Beast.  Initia
 ![Directory listing of B drive](/assets/img/2026-03-21_dir_b.png)
 
 Happily there is a solution: 
-there's a utility on the standard `A:` drive called `SAVE` which will copy your RAM disk into the 
+a utility on the standard `A:` drive called `SAVE` which will copy your RAM disk into the 
 'Beast's non-volatile memory: that is, memory that survives a reboot/power-cycle. The corresponding 
 utility `RESTORE` performs the reverse process, copying the non-volatile backup back to the RAM disk 
 so that you can continue working. 
@@ -156,7 +157,7 @@ through the virtual console.
 transferred over as my new non-volatile disk. This means in future I can boot the 'Beast, type `RESTORE`, and 
 immediately have access to `SLIDE.COM` so I can get started quickly.
 
-> DO NOT DO THIS if you already have precious work on your B drive that you want to keep!
+> *DO NOT DO THIS* if you already have precious work on your B drive that you want to keep!
 > The SLIDE disk image will entirely replace your non-volatile disk image, erasing anything that's 
 > already stored in there.
 {: .prompt-danger }
@@ -175,7 +176,7 @@ the `sb` command that we'll use to handle Y-Modem.
 1. On a debian/ubuntu system, installation is easy:
 
 ```
-sudo apt-get install minicom lrzsz
+sudo apt install minicom lrzsz
 ```
 
 2. Next we need to plug the 'Beast into our computer with a USB serial cable, and figure out the relevant 
@@ -244,6 +245,8 @@ We can do this in minicom with `CTRL-A S` (for "send"):
 but be careful to only select one. You can enter a sub-directory by double-tapping `SPACE`, and double-tap on the `[..]` to go back up to the 
 parent directory. Make sure you have the `slide_p25.img` file selected, and then hit `ENTER` to start the file transfer. If you want to bail 
 without starting the transfer, hit `Escape`. 
+
+![minicom file selection](../assets/img/2026-03-21_minicom_send_file.png)
 
 18. You'll see the file transfer dialogue open and begin to track the file upload progress. It can take a while!
 
