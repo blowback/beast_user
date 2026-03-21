@@ -248,7 +248,7 @@ but be careful to only select one. You can enter a sub-directory by double-tappi
 parent directory. Make sure you have the `slide_p25.img` file selected, and then hit `ENTER` to start the file transfer. If you want to bail 
 without starting the transfer, hit `Escape`. 
 
-![minicom file selection](../assets/img/2026-03-21_minicom_send_file.png)
+![minicom file selection](/assets/img/2026-03-21_minicom_send_file.png)
 
 18. You'll see the file transfer dialogue open and begin to track the file upload progress. It can take a while!
 
