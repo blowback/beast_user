@@ -23,7 +23,7 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://blowback.github.io/chirpy_base"
+url: "https://blowback.github.io/beast_user"
 
 github:
   username: blowback # change to your GitHub username
@@ -88,7 +88,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode: dark # [light | dark]
+theme_mode: light # [light | dark]
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
@@ -150,7 +150,7 @@ pwa:
 paginate: 10
 
 # The base URL of your site
-baseurl: "/chirpy_base"
+baseurl: "/beast_user"
 
 # ------------ The following options are not recommended to be modified ------------------
 
