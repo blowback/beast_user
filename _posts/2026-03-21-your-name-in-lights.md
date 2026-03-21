@@ -1,6 +1,8 @@
 --- 
 title: Your name in lights!
 date: 2026-03-21
+categories: [Tutorials]
+tags: [microbeast, nanobeast, slide, ymodem, cpm]
 --- 
 
 # So you've built your 'Beast - now what?
