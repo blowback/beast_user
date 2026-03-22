@@ -41,7 +41,7 @@ Each digit has 14 lamps or "segments" that we can turn on to form the shape of t
 we want to display (there's actually a 15th - every character has a decimal point in the 
 bottom right).
 
-*TODO* - insert segment graphic 
+![LED segments](/assets/img/20260322/led_segments.png)
 
 # Firmware fundamentals
 
