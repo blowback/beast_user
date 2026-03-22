@@ -1,7 +1,7 @@
 
---- 
+---
 title: Your name in lights! (Part 2)
-date: 2026-03-21
+date: 2026-03-22
 categories: [Tutorials]
 tags: [microbeast, nanobeast, slide, ymodem, cpm]
 --- 
@@ -66,14 +66,14 @@ columns on the LED display, and we start counting at 0).
 
 Don't worry about what registers are, and why some of them have single character names and some of them have two character 
 names - we'll get into that later. For now, just think of them as variables you can set, before calling the BIOS routine 
-(think of it as a `procedure` or a `function` or even a `gosub` to do the work). So we're essentially saying:
+(think of it as a `procedure` or a `function` or even a `GOSUB` that does the work). So we're essentially saying:
 
 1. set `HL` to the 16-bit word that describes the symbol we want
 2. set A to the column that we want to show it in
 3. make the processor jump to `MBB_WRITE_LED` (0xFDD6) to do the work 
 
 This kind of encapsulation and re-use is fundamental to pretty much all forms of software development; often described 
-as the **DRY* priincipal: Don't Repeat Yourself. (The opposite, of course, is Write Everything Twice...)
+as the *DRY* principal: Don't Repeat Yourself. (The opposite, of course, is Write Everything Twice...)
 
 ## Microsoft BASIC 80 
 
@@ -123,7 +123,7 @@ The usual approach, it seems, is to `POKE` in a small machine code wrapper that 
 
 The code looks like this:
 
-```
+```BASIC
 
 10 REM === MicroBeast LED Demo - Step 1: Raw Segment Control ===
 20 REM Turn ON all 14 segments of the last 4 LED positions (columns 20-23)
@@ -163,7 +163,7 @@ the BIOS code in BASIC). So for the time being, ignore lines 10-210 which create
 
 In line 230 we're setting the bitmask variable:
 
-```
+```BASIC
 BM% = &H3FFF
 ```
 
@@ -180,10 +180,10 @@ Let's give it a go!
 
 ## Running our first BASIC program 
 
-Fire up your `Beast and SLIDE `LEDS.BAS` over to your `B:` drive. Make sure you're "logged in" to the `A:` drive 
+Fire up your 'Beast and SLIDE `LEDS.BAS` over to your `B:` drive. Make sure you're "logged in" to the `A:` drive 
 (that's CP/M jargon that means your prompt says `A>` - if it doesn't type `A:` and hit ENTER). Type `MBASIC` to 
 start the BASIC interpreter, and then type `LOAD "B:LEDS"` to load the demo program. You can type `LIST` to 
-examine it if you like, and whn you're ready type `RUN` and hit ENTER:
+examine it if you like, and when you're ready type `RUN` and hit ENTER:
 
 ![MBASIC loading LEDS.BAS](/assets/img/20260322/mbasic_load_leds.png)
 
