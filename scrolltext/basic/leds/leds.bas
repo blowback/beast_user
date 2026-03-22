@@ -31,7 +31,7 @@
 310 REM
 320 FOR C = 20 TO 23
 330   POKE 60012, C: REM column number into A parameter
-340   CALL 60000
+340   CALL S
 350 NEXT C
 360 REM
 370 PRINT "All segments ON for columns 20-23"

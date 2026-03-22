@@ -36,7 +36,7 @@
 370   HI = INT(BM / 256): LO = BM - HI * 256
 380   POKE 60010, LO: POKE 60011, HI
 390   POKE 60012, C
-400   CALL 60000
+400   CALL S
 410 NEXT C
 420 REM
 430 REM --- Delay for scroll speed ---

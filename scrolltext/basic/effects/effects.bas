@@ -60,12 +60,12 @@
 660   HI = INT(BM / 256): LO = BM - HI * 256
 670   POKE 60010, LO: POKE 60011, HI
 680   POKE 60012, C
-690   CALL 60000
+690   CALL S
 700   REM Set brightness from sine table
 710   SI = (C + BO) AND 63: REM modulo 64
 720   POKE 60032, C: REM column
 730   POKE 60031, SN(SI): REM brightness
-740   CALL 60020
+740   CALL B
 750 NEXT C
 760 REM
 770 REM --- Advance brightness every frame, text every 3 frames ---
