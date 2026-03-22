@@ -304,5 +304,5 @@ Congratulations if you've made it this far! You've learned all the steps needed 
 and we're well on our way to being able to use SLIDE to conveniently transfer files. A lot of what you've learned 
 (YMODEM etc) is directly applicable to firmware upgrades also, so these skills will prove very handy.
 
-In Part Two we'll write our first program and send it over to the 'Beast using SLIDE!
+In [Part Two]({% link _posts/2026-03-22-your-name-in-lights-part-two.md %}) we'll write our first program and send it over to the 'Beast using SLIDE!
 
