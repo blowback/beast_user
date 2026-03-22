@@ -12,9 +12,7 @@
 120 REM --- Set up machine code stub at 60000 (&HEA60) ---
 130 REM CALL S(BM, CO) passes HL=bitmask, DE=column
 140 S = 60000
-150 POKE S+0, &H7B: REM LD A,E
-160 POKE S+1, &HCD: POKE S+2, &HD6: POKE S+3, &HFD: REM CALL &HFDD6
-170 POKE S+4, &HC9: REM RET
+150 FOR I = 0 TO 4: READ V: POKE S+I, V: NEXT I
 190 REM
 200 REM --- Read font data into array ---
 210 REM 95 entries: ASCII 32 (space) through ASCII 126 (~)
@@ -36,9 +34,12 @@
 410 PRINT "Displayed HELLO on columns 19-23"
 420 END
 430 REM
-440 REM --- Font DATA (ASCII 32-126, 95 entries) ---
-450 REM Each value is a 16-bit bitmask for the 14-segment display
+440 REM --- MBB_WRITE_LED stub: LD A,E / CALL &HFDD6 / RET ---
+450 DATA &H7B, &HCD, &HD6, &HFD, &HC9
 460 REM
+470 REM --- Font DATA (ASCII 32-126, 95 entries) ---
+480 REM Each value is a 16-bit bitmask for the 14-segment display
+490 REM
 470 DATA 0, 18688, 514, 4814, 4845, 11748
 480 DATA 2905, 512, 3072, 8448, 16320, 4800
 490 DATA 8192, 192, 16384, 9216

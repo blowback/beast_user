@@ -5,23 +5,13 @@
 50 REM --- Machine code stub for MBB_WRITE_LED at 60000 (&HEA60) ---
 60 REM CALL S(BM, C) passes HL=bitmask, DE=column
 70 S = 60000
-80 POKE S+0, &H7B: REM LD A,E
-90 POKE S+1, &HCD: POKE S+2, &HD6: POKE S+3, &HFD: REM CALL &HFDD6
-100 POKE S+4, &HC9: REM RET
-110 REM
-120 REM --- Machine code stub for MBB_LED_BRIGHTNESS at 60005 (&HEA65) ---
-130 REM CALL B(BR, C) passes HL=brightness, DE=column
-140 REM   LD A,L          ; brightness into A
-150 REM   LD C,A          ; C = brightness
-160 REM   LD A,E          ; column into A
-170 REM   CALL &HFDD3     ; MBB_LED_BRIGHTNESS
-180 REM   RET
-190 B = 60005
-200 POKE B+0, &H7D: REM LD A,L
-210 POKE B+1, &H4F: REM LD C,A
-220 POKE B+2, &H7B: REM LD A,E
-230 POKE B+3, &HCD: POKE B+4, &HD3: POKE B+5, &HFD: REM CALL &HFDD3
-240 POKE B+6, &HC9: REM RET
+80 FOR I = 0 TO 4: READ V: POKE S+I, V: NEXT I
+90 REM
+100 REM --- Machine code stub for MBB_LED_BRIGHTNESS at 60005 (&HEA65) ---
+110 REM CALL B(BR, C) passes HL=brightness, DE=column
+120 REM   LD A,L / LD C,A / LD A,E / CALL &HFDD3 / RET
+130 B = 60005
+140 FOR I = 0 TO 6: READ V: POKE B+I, V: NEXT I
 350 REM
 360 REM --- Read font data into array (ASCII 32-126) ---
 370 DIM FT(94)
@@ -67,7 +57,13 @@
 820 REM
 830 GOTO 600
 840 REM
-850 REM --- Font DATA (ASCII 32-126, 95 entries) ---
+845 REM --- MBB_WRITE_LED stub: LD A,E / CALL &HFDD6 / RET ---
+846 DATA &H7B, &HCD, &HD6, &HFD, &HC9
+847 REM
+848 REM --- MBB_LED_BRIGHTNESS stub: LD A,L / LD C,A / LD A,E / CALL &HFDD3 / RET ---
+849 DATA &H7D, &H4F, &H7B, &HCD, &HD3, &HFD, &HC9
+850 REM
+851 REM --- Font DATA (ASCII 32-126, 95 entries) ---
 860 DATA 0, 18688, 514, 4814, 4845, 11748
 870 DATA 2905, 512, 3072, 8448, 16320, 4800
 880 DATA 8192, 192, 16384, 9216

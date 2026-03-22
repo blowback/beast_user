@@ -15,9 +15,7 @@
 150 REM   RET             ; return to BASIC
 160 REM
 170 S = 60000
-180 POKE S+0, &H7B: REM LD A,E
-190 POKE S+1, &HCD: POKE S+2, &HD6: POKE S+3, &HFD: REM CALL &HFDD6
-200 POKE S+4, &HC9: REM RET
+180 FOR I = 0 TO 4: READ V: POKE S+I, V: NEXT I
 210 REM
 220 REM --- Write all segments ON to columns 20-23 ---
 230 BM = &H3FFF: REM all 14 segments ON
@@ -27,3 +25,6 @@
 360 REM
 370 PRINT "All segments ON for columns 20-23"
 380 END
+390 REM
+400 REM --- MBB_WRITE_LED stub: LD A,E / CALL &HFDD6 / RET ---
+410 DATA &H7B, &HCD, &HD6, &HFD, &HC9
