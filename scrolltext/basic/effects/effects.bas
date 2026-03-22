@@ -4,13 +4,13 @@
 40 REM
 50 REM --- Machine code stub for MBB_WRITE_LED at 60000 (&HEA60) ---
 60 REM CALL S%(BM%, C%) passes HL=&bitmask, DE=&column
-70 S% = 60000
+70 S% = &HEA60
 80 FOR I% = 0 TO 10: READ V%: POKE S%+I%, V%: NEXT I%
 90 REM
 100 REM --- Machine code stub for MBB_LED_BRIGHTNESS at 60011 (&HEA6B) ---
 110 REM CALL B%(BR%, C%) passes HL=&brightness, DE=&column
 120 REM   EX DE,HL / LD A,(HL) / EX DE,HL / LD C,(HL) / CALL &HFDD3 / RET
-130 B% = 60011
+130 B% = &HEA6B
 140 FOR I% = 0 TO 7: READ V%: POKE B%+I%, V%: NEXT I%
 350 REM
 360 REM --- Read font data into array (ASCII 32-126) ---

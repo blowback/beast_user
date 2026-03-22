@@ -14,7 +14,7 @@
 140 REM   LD E,(HL) / INC HL / LD D,(HL)   ; DE = bitmask
 150 REM   EX DE,HL / CALL &HFDD6 / RET     ; HL = bitmask
 160 REM
-170 S% = 60000
+170 S% = &HEA60
 180 FOR I% = 0 TO 10: READ V%: POKE S%+I%, V%: NEXT I%
 210 REM
 220 REM --- Write all segments ON to columns 20-23 ---

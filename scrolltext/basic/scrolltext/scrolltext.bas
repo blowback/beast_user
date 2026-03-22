@@ -5,7 +5,7 @@
 50 REM
 60 REM --- Set up machine code stub at 60000 (&HEA60) ---
 70 REM CALL S%(BM%, C%) passes HL=&bitmask, DE=&column
-80 S% = 60000
+80 S% = &HEA60
 90 FOR I% = 0 TO 10: READ V%: POKE S%+I%, V%: NEXT I%
 120 REM
 130 REM --- Read font data into array (ASCII 32-126) ---
