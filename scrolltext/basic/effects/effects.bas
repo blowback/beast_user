@@ -3,30 +3,25 @@
 30 REM The brightness wave scrolls independently of the text.
 40 REM
 50 REM --- Machine code stub for MBB_WRITE_LED at 60000 (&HEA60) ---
-60 S = 60000
-70 POKE S+0, &H2A: POKE S+1, &H6A: POKE S+2, &HEA: REM LD HL,(60010)
-80 POKE S+3, &H3A: POKE S+4, &H6C: POKE S+5, &HEA: REM LD A,(60012)
-90 POKE S+6, &HCD: POKE S+7, &HD6: POKE S+8, &HFD: REM CALL &HFDD6
-100 POKE S+9, &HC9: REM RET
+60 REM CALL S(BM, C) passes HL=bitmask, DE=column
+70 S = 60000
+80 POKE S+0, &H7B: REM LD A,E
+90 POKE S+1, &HCD: POKE S+2, &HD6: POKE S+3, &HFD: REM CALL &HFDD6
+100 POKE S+4, &HC9: REM RET
 110 REM
-120 REM --- Machine code stub for MBB_LED_BRIGHTNESS at 60020 (&HEA74) ---
-130 REM   LD A,(60031)   ; brightness (&HEA7F)
-140 REM   LD C,A         ; C = brightness
-150 REM   LD A,(60032)   ; column (&HEA80)
-160 REM   CALL &HFDD3    ; MBB_LED_BRIGHTNESS (A=column, C=brightness)
-170 REM   RET
-180 REM Stub is 11 bytes (60020-60030), params at 60031-60032
-200 B = 60020
-210 REM LD A,(&HEA7F) = 3Ah 7Fh EAh (brightness at 60031)
-220 POKE B+0, &H3A: POKE B+1, &H7F: POKE B+2, &HEA
-230 REM LD C,A = 4Fh (C = brightness)
-240 POKE B+3, &H4F
-250 REM LD A,(&HEA80) = 3Ah 80h EAh (column at 60032)
-260 POKE B+4, &H3A: POKE B+5, &H80: POKE B+6, &HEA
-270 REM CALL &HFDD3 = CDh D3h FDh
-280 POKE B+7, &HCD: POKE B+8, &HD3: POKE B+9, &HFD
-290 REM RET = C9h
-300 POKE B+10, &HC9
+120 REM --- Machine code stub for MBB_LED_BRIGHTNESS at 60005 (&HEA65) ---
+130 REM CALL B(BR, C) passes HL=brightness, DE=column
+140 REM   LD A,L          ; brightness into A
+150 REM   LD C,A          ; C = brightness
+160 REM   LD A,E          ; column into A
+170 REM   CALL &HFDD3     ; MBB_LED_BRIGHTNESS
+180 REM   RET
+190 B = 60005
+200 POKE B+0, &H7D: REM LD A,L
+210 POKE B+1, &H4F: REM LD C,A
+220 POKE B+2, &H7B: REM LD A,E
+230 POKE B+3, &HCD: POKE B+4, &HD3: POKE B+5, &HFD: REM CALL &HFDD3
+240 POKE B+6, &HC9: REM RET
 350 REM
 360 REM --- Read font data into array (ASCII 32-126) ---
 370 DIM FT(94)
@@ -57,15 +52,11 @@
 630   IX = ASC(CH$) - 32
 640   IF IX < 0 OR IX > 94 THEN IX = 0
 650   BM = FT(IX)
-660   HI = INT(BM / 256): LO = BM - HI * 256
-670   POKE 60010, LO: POKE 60011, HI
-680   POKE 60012, C
-690   CALL S
-700   REM Set brightness from sine table
-710   SI = (C + BO) AND 63: REM modulo 64
-720   POKE 60032, C: REM column
-730   POKE 60031, SN(SI): REM brightness
-740   CALL B
+660   CALL S(BM, C)
+670   REM Set brightness from sine table
+680   SI = (C + BO) AND 63: REM modulo 64
+690   BR = SN(SI)
+700   CALL B(BR, C)
 750 NEXT C
 760 REM
 770 REM --- Advance brightness every frame, text every 3 frames ---

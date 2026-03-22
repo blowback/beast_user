@@ -8,31 +8,22 @@
 80 REM machine-code stub into memory that loads HL and A then calls BIOS.
 90 REM
 100 REM --- Machine code stub at address 60000 (&HEA60) ---
-110 REM The stub does:
-120 REM   LD HL,(60010)   ; load bitmask from parameter area (&HEA6A)
-130 REM   LD A,(60012)    ; load column number (&HEA6C)
+110 REM CALL S(BM, C) passes HL=bitmask, DE=column
+120 REM The stub does:
+130 REM   LD A,E          ; column into A
 140 REM   CALL &HFDD6     ; MBB_WRITE_LED
 150 REM   RET             ; return to BASIC
 160 REM
 170 S = 60000
-180 REM LD HL,(&HEA6A) = 2Ah 6Ah EAh
-190 POKE S+0, &H2A: POKE S+1, &H6A: POKE S+2, &HEA
-200 REM LD A,(&HEA6C) = 3Ah 6Ch EAh
-210 POKE S+3, &H3A: POKE S+4, &H6C: POKE S+5, &HEA
-220 REM CALL &HFDD6 = CDh D6h FDh
-230 POKE S+6, &HCD: POKE S+7, &HD6: POKE S+8, &HFD
-240 REM RET = C9h
-250 POKE S+9, &HC9
-260 REM
-270 REM --- Write all segments ON to columns 20-23 ---
-280 REM Set bitmask = &H3FFF (all segments on)
-290 POKE 60010, &HFF: REM low byte of HL (L = outer segments)
-300 POKE 60011, &H3F: REM high byte of HL (H = inner segments)
-310 REM
-320 FOR C = 20 TO 23
-330   POKE 60012, C: REM column number into A parameter
-340   CALL S
-350 NEXT C
+180 POKE S+0, &H7B: REM LD A,E
+190 POKE S+1, &HCD: POKE S+2, &HD6: POKE S+3, &HFD: REM CALL &HFDD6
+200 POKE S+4, &HC9: REM RET
+210 REM
+220 REM --- Write all segments ON to columns 20-23 ---
+230 BM = &H3FFF: REM all 14 segments ON
+240 FOR C = 20 TO 23
+250   CALL S(BM, C)
+260 NEXT C
 360 REM
 370 PRINT "All segments ON for columns 20-23"
 380 END

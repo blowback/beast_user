@@ -4,11 +4,11 @@
 40 REM in from the right and out to the left.
 50 REM
 60 REM --- Set up machine code stub at 60000 (&HEA60) ---
-70 S = 60000
-80 POKE S+0, &H2A: POKE S+1, &H6A: POKE S+2, &HEA: REM LD HL,(60010)
-90 POKE S+3, &H3A: POKE S+4, &H6C: POKE S+5, &HEA: REM LD A,(60012)
-100 POKE S+6, &HCD: POKE S+7, &HD6: POKE S+8, &HFD: REM CALL &HFDD6
-110 POKE S+9, &HC9: REM RET
+70 REM CALL S(BM, C) passes HL=bitmask, DE=column
+80 S = 60000
+90 POKE S+0, &H7B: REM LD A,E
+100 POKE S+1, &HCD: POKE S+2, &HD6: POKE S+3, &HFD: REM CALL &HFDD6
+110 POKE S+4, &HC9: REM RET
 120 REM
 130 REM --- Read font data into array (ASCII 32-126) ---
 140 DIM FT(94)
@@ -33,11 +33,8 @@
 340   IX = ASC(CH$) - 32
 350   IF IX < 0 OR IX > 94 THEN IX = 0
 360   BM = FT(IX)
-370   HI = INT(BM / 256): LO = BM - HI * 256
-380   POKE 60010, LO: POKE 60011, HI
-390   POKE 60012, C
-400   CALL S
-410 NEXT C
+370   CALL S(BM, C)
+380 NEXT C
 420 REM
 430 REM --- Delay for scroll speed ---
 440 FOR D = 1 TO 200: NEXT D

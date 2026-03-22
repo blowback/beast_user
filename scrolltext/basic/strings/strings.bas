@@ -3,11 +3,11 @@
 30 REM Uses font lookup to convert each character to its 14-segment bitmask.
 40 REM
 50 REM --- Set up machine code stub at 60000 (&HEA60) ---
-60 S = 60000
-70 POKE S+0, &H2A: POKE S+1, &H6A: POKE S+2, &HEA: REM LD HL,(60010)
-80 POKE S+3, &H3A: POKE S+4, &H6C: POKE S+5, &HEA: REM LD A,(60012)
-90 POKE S+6, &HCD: POKE S+7, &HD6: POKE S+8, &HFD: REM CALL &HFDD6
-100 POKE S+9, &HC9: REM RET
+60 REM CALL S(BM, C) passes HL=bitmask, DE=column
+70 S = 60000
+80 POKE S+0, &H7B: REM LD A,E
+90 POKE S+1, &HCD: POKE S+2, &HD6: POKE S+3, &HFD: REM CALL &HFDD6
+100 POKE S+4, &HC9: REM RET
 110 REM
 120 REM --- Read font data into array (ASCII 32-126) ---
 130 DIM FT(94)
@@ -22,11 +22,8 @@
 220   IF C < LEN(T$) THEN IX = ASC(MID$(T$, C+1, 1)) - 32 ELSE IX = 0
 230   IF IX < 0 OR IX > 94 THEN IX = 0
 240   BM = FT(IX)
-250   HI = INT(BM / 256): LO = BM - HI * 256
-260   POKE 60010, LO: POKE 60011, HI
-270   POKE 60012, C
-280   CALL S
-290 NEXT C
+250   CALL S(BM, C)
+260 NEXT C
 300 REM
 310 PRINT "Done!"
 320 END

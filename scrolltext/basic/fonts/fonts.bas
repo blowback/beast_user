@@ -10,12 +10,11 @@
 100 REM Lookup: index = ASC(char) - 32, bitmask = FT(index)
 110 REM
 120 REM --- Set up machine code stub at 60000 (&HEA60) ---
-130 REM Same stub as leds.bas: loads HL and A, calls MBB_WRITE_LED
+130 REM CALL S(BM, CO) passes HL=bitmask, DE=column
 140 S = 60000
-150 POKE S+0, &H2A: POKE S+1, &H6A: POKE S+2, &HEA: REM LD HL,(60010)
-160 POKE S+3, &H3A: POKE S+4, &H6C: POKE S+5, &HEA: REM LD A,(60012)
-170 POKE S+6, &HCD: POKE S+7, &HD6: POKE S+8, &HFD: REM CALL &HFDD6
-180 POKE S+9, &HC9: REM RET
+150 POKE S+0, &H7B: REM LD A,E
+160 POKE S+1, &HCD: POKE S+2, &HD6: POKE S+3, &HFD: REM CALL &HFDD6
+170 POKE S+4, &HC9: REM RET
 190 REM
 200 REM --- Read font data into array ---
 210 REM 95 entries: ASCII 32 (space) through ASCII 126 (~)
@@ -30,13 +29,9 @@
 300   C$ = MID$(H$, I, 1)
 310   IX = ASC(C$) - 32
 320   BM = FT(IX)
-330   REM Split 16-bit value into low and high bytes
-340   HI = INT(BM / 256)
-350   LO = BM - HI * 256
-360   POKE 60010, LO: POKE 60011, HI
-370   POKE 60012, 18 + I
-380   CALL S
-390 NEXT I
+330   CO = 18 + I
+340   CALL S(BM, CO)
+350 NEXT I
 400 REM
 410 PRINT "Displayed HELLO on columns 19-23"
 420 END
