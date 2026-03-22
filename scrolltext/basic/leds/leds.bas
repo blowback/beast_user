@@ -8,23 +8,23 @@
 80 REM machine-code stub into memory that loads HL and A then calls BIOS.
 90 REM
 100 REM --- Machine code stub at address 60000 (&HEA60) ---
-110 REM CALL S(BM, C) passes HL=bitmask, DE=column
-120 REM The stub does:
-130 REM   LD A,E          ; column into A
-140 REM   CALL &HFDD6     ; MBB_WRITE_LED
-150 REM   RET             ; return to BASIC
+110 REM CALL S%(BM%, C%) passes HL=&bitmask, DE=&column
+120 REM The stub dereferences the pointers:
+130 REM   EX DE,HL / LD A,(HL) / EX DE,HL  ; A = column
+140 REM   LD E,(HL) / INC HL / LD D,(HL)   ; DE = bitmask
+150 REM   EX DE,HL / CALL &HFDD6 / RET     ; HL = bitmask
 160 REM
-170 S = 60000
-180 FOR I = 0 TO 4: READ V: POKE S+I, V: NEXT I
+170 S% = 60000
+180 FOR I% = 0 TO 10: READ V%: POKE S%+I%, V%: NEXT I%
 210 REM
 220 REM --- Write all segments ON to columns 20-23 ---
-230 BM = &H3FFF: REM all 14 segments ON
-240 FOR C = 20 TO 23
-250   CALL S(BM, C)
-260 NEXT C
+230 BM% = &H3FFF: REM all 14 segments ON
+240 FOR C% = 20 TO 23
+250   CALL S%(BM%, C%)
+260 NEXT C%
 360 REM
 370 PRINT "All segments ON for columns 20-23"
 380 END
 390 REM
-400 REM --- MBB_WRITE_LED stub: LD A,E / CALL &HFDD6 / RET ---
-410 DATA &H7B, &HCD, &HD6, &HFD, &HC9
+400 REM --- MBB_WRITE_LED stub (11 bytes) ---
+410 DATA &HEB, &H7E, &HEB, &H5E, &H23, &H56, &HEB, &HCD, &HD6, &HFD, &HC9

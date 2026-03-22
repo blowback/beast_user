@@ -3,23 +3,23 @@
 30 REM The brightness wave scrolls independently of the text.
 40 REM
 50 REM --- Machine code stub for MBB_WRITE_LED at 60000 (&HEA60) ---
-60 REM CALL S(BM, C) passes HL=bitmask, DE=column
-70 S = 60000
-80 FOR I = 0 TO 4: READ V: POKE S+I, V: NEXT I
+60 REM CALL S%(BM%, C%) passes HL=&bitmask, DE=&column
+70 S% = 60000
+80 FOR I% = 0 TO 10: READ V%: POKE S%+I%, V%: NEXT I%
 90 REM
-100 REM --- Machine code stub for MBB_LED_BRIGHTNESS at 60005 (&HEA65) ---
-110 REM CALL B(BR, C) passes HL=brightness, DE=column
-120 REM   LD A,L / LD C,A / LD A,E / CALL &HFDD3 / RET
-130 B = 60005
-140 FOR I = 0 TO 6: READ V: POKE B+I, V: NEXT I
+100 REM --- Machine code stub for MBB_LED_BRIGHTNESS at 60011 (&HEA6B) ---
+110 REM CALL B%(BR%, C%) passes HL=&brightness, DE=&column
+120 REM   EX DE,HL / LD A,(HL) / EX DE,HL / LD C,(HL) / CALL &HFDD3 / RET
+130 B% = 60011
+140 FOR I% = 0 TO 7: READ V%: POKE B%+I%, V%: NEXT I%
 350 REM
 360 REM --- Read font data into array (ASCII 32-126) ---
-370 DIM FT(94)
-380 FOR I = 0 TO 94: READ FT(I): NEXT I
+370 DIM FT%(94)
+380 FOR I% = 0 TO 94: READ FT%(I%): NEXT I%
 390 REM
 400 REM --- Read sine table (64 entries, values 0-128) ---
-410 DIM SN(63)
-420 FOR I = 0 TO 63: READ SN(I): NEXT I
+410 DIM SN%(63)
+420 FOR I% = 0 TO 63: READ SN%(I%): NEXT I%
 430 REM
 440 REM --- Get user input ---
 450 INPUT "Enter scroll text: ", T$
@@ -27,41 +27,41 @@
 480 REM --- Build padded buffer ---
 490 P$ = "                        ": REM 24 spaces
 500 B$ = P$ + T$ + P$
-510 BL = LEN(B$)
+510 BL% = LEN(B$)
 520 REM
 530 REM --- Scroll loop with brightness effect ---
 540 PRINT "Scrolling with effects... press Ctrl-C to stop"
-550 OF = 1: REM text scroll offset (1-based)
-560 BO = 0: REM brightness wave offset
-570 FC = 0: REM frame counter for text speed
+550 OF% = 1: REM text scroll offset (1-based)
+560 BO% = 0: REM brightness wave offset
+570 FC% = 0: REM frame counter for text speed
 580 REM
 590 REM --- Display frame ---
-600 FOR C = 0 TO 23
+600 FOR C% = 0 TO 23
 610   REM Look up character and write to LED
-620   CH$ = MID$(B$, OF + C, 1)
-630   IX = ASC(CH$) - 32
-640   IF IX < 0 OR IX > 94 THEN IX = 0
-650   BM = FT(IX)
-660   CALL S(BM, C)
+620   CH$ = MID$(B$, OF% + C%, 1)
+630   IX% = ASC(CH$) - 32
+640   IF IX% < 0 OR IX% > 94 THEN IX% = 0
+650   BM% = FT%(IX%)
+660   CALL S%(BM%, C%)
 670   REM Set brightness from sine table
-680   SI = (C + BO) AND 63: REM modulo 64
-690   BR = SN(SI)
-700   CALL B(BR, C)
-750 NEXT C
+680   SI% = (C% + BO%) AND 63: REM modulo 64
+690   BR% = SN%(SI%)
+700   CALL B%(BR%, C%)
+750 NEXT C%
 760 REM
 770 REM --- Advance brightness every frame, text every 3 frames ---
-780 BO = (BO + 1) AND 63
-790 FC = FC + 1
-800 IF FC >= 3 THEN OF = OF + 1: FC = 0
-810 IF OF > BL - 23 THEN OF = 1
+780 BO% = (BO% + 1) AND 63
+790 FC% = FC% + 1
+800 IF FC% >= 3 THEN OF% = OF% + 1: FC% = 0
+810 IF OF% > BL% - 23 THEN OF% = 1
 820 REM
 830 GOTO 600
 840 REM
-845 REM --- MBB_WRITE_LED stub: LD A,E / CALL &HFDD6 / RET ---
-846 DATA &H7B, &HCD, &HD6, &HFD, &HC9
+845 REM --- MBB_WRITE_LED stub (11 bytes) ---
+846 DATA &HEB, &H7E, &HEB, &H5E, &H23, &H56, &HEB, &HCD, &HD6, &HFD, &HC9
 847 REM
-848 REM --- MBB_LED_BRIGHTNESS stub: LD A,L / LD C,A / LD A,E / CALL &HFDD3 / RET ---
-849 DATA &H7D, &H4F, &H7B, &HCD, &HD3, &HFD, &HC9
+848 REM --- MBB_LED_BRIGHTNESS stub (8 bytes) ---
+849 DATA &HEB, &H7E, &HEB, &H4E, &HCD, &HD3, &HFD, &HC9
 850 REM
 851 REM --- Font DATA (ASCII 32-126, 95 entries) ---
 860 DATA 0, 18688, 514, 4814, 4845, 11748
