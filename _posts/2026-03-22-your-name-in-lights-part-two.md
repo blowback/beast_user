@@ -5,7 +5,7 @@ categories: [Tutorials]
 tags: [microbeast, nanobeast, slide, ymodem, cpm]
 --- 
 
-Last time, we got to grips with the 'Beast and its hardware and got comfortable transferring disk images 
+[Last time]({% link _posts/2026-03-21-your-name-in-lights.md}), we got to grips with the 'Beast and its hardware and got comfortable transferring disk images 
 onto the 'Beast using Y-Modem. 
 
 We're going to be building on that foundation here, so if you skipped Part One or are still a little shaky 
