@@ -1,4 +1,3 @@
-
 ---
 title: Your name in lights! (Part 2)
 date: 2026-03-22
