@@ -29,9 +29,17 @@ All of the standard characters on the 'Beast can be represented by an [ASCII cod
 for example the letter `A` is character number 65 (0x41). It would be convenient to use these values when we're 
 trying to write every-day text to our display, and only resort to codewords when we want a Space Invader, or something.
 
-You might guess from the Font Editor I've shown you previously that this involves creating a "Font" which is simply a 
+![ASCII table](/assets/img/20260323/ascii_table.png)
+
+> Incidentally, the ASCII standard is a supremely elegant bit of design: read [this post](https://danq.me/2024/07/21/ascii/) if you want to know more!
+{: .prompt-tip }
+
+You might guess from the [Font Editor](https://blowback.github.io/microbeast-font-editor/) I've shown you previously 
+that this involves creating a "Font" which is simply a 
 big table of codewords for every letter, digit or punctuation mark we wish to use, systematically organised in such a 
 way that we can convert from ASCII codes to LED code-words.
+
+![Font Editor](/assets/img/20260323/font_editor.png)
 
 You might also be thinking "Hold on, the 'Beast already displays characters perfectly well, surely someone has already 
 done this work?" - and you'd be right. The 'Beast's designers have already provided a "font" that covers the 94 most 

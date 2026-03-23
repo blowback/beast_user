@@ -214,7 +214,8 @@ When you're done, remember that `SYSTEM` exits MBasic and returns you to CP/M.
 ## End of Part Two 
 
 So far so good - we learned a lot of stuff about MBasic and actually managed to write some code and run it on the 
-'Beast! But funky symbols can only keep us amused for so long. Join me in Part Three where we can start to put 
+'Beast! But funky symbols can only keep us amused for so long. Join me in [Part Three]({% link _posts/2026-03-23-your-name-in-lights-part-three.md %}) 
+where we can start to put 
 recognisable characters on the display!
 
 
