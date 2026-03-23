@@ -143,7 +143,7 @@ You know the drill:
 
 All being well, you should see this (your string might be different):
 
-![MBASIC running SCROLTXT.BAS](/assets/img/20260324/display_scrolltext.jpg)
+![MBASIC running SCROLTXT.BAS](/assets/img/20260325/display_scrolltext.jpg)
 
 ## Things you can try
 
