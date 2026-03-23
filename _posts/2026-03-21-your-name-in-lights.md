@@ -74,13 +74,13 @@ main drawback is that its contents will be lost if you reset the 'Beast.  Initia
 ![Directory listing of B drive](/assets/img/2026-03-21_dir_b.png)
 
 Happily there is a solution: 
-a utility on the standard `A:` drive called `SAVE` which will copy your RAM disk into the 
+a utility on the standard `A:` drive called `WRITE` which will copy your RAM disk into the 
 'Beast's non-volatile memory: that is, memory that survives a reboot/power-cycle. The corresponding 
 utility `RESTORE` performs the reverse process, copying the non-volatile backup back to the RAM disk 
 so that you can continue working. 
 
-You'll soon get into the rhythm of `RESTORE`, work on some stuff, `SAVE`. Inevitably sometimes you 
-will forgot to `RESTORE`, forget to `SAVE`, or get the order wrong and write a blank RAM disk over 
+You'll soon get into the rhythm of `RESTORE`, work on some stuff, `WRITE`. Inevitably sometimes you 
+will forgot to `RESTORE`, forget to `WRITE`, or get the order wrong and write a blank RAM disk over 
 your precious non-volatile copy. That last one can be especially devastating, so we need a more 
 robust approach to saving our creations. 
 
@@ -155,7 +155,7 @@ through the virtual console.
 
 ![Beast showing slide](/assets/img/2026-03-21_slide.jpg)
 
-11. At this point I like to go back to `A:` and use the `SAVE` command to save the new disk image we just 
+11. At this point I like to go back to `A:` and use the `WRITE` command to save the new disk image we just 
 transferred over as my new non-volatile disk. This means in future I can boot the 'Beast, type `RESTORE`, and 
 immediately have access to `SLIDE.COM` so I can get started quickly.
 
