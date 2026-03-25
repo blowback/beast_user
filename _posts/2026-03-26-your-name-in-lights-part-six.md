@@ -50,7 +50,7 @@ The rough plan is, we'll send lovely shimmering waves of varying brightness alon
 to pull this off, we'll construct a *lookup table* where we've pre-computed brightness levels so that they follow a sine wave 
 pattern, like this:
 
-![sin wave](../assets/img/20260326/sine.png)
+![sin wave](/assets/img/20260326/sine.png)
 
 We *could* generate this lookup table in BASIC using the SIN() function, but it's a little awkward and frankly a lot easier 
 to generate the values and cast them to integer values in the correct range using a python script on a modern PC, so that's 
