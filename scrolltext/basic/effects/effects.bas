@@ -29,33 +29,35 @@
 500 B$ = P$ + T$ + P$
 510 BL% = LEN(B$)
 520 REM
-530 REM --- Scroll loop with brightness effect ---
+530 REM --- Main loop ---
 540 PRINT "Scrolling with effects... press Ctrl-C to stop"
 550 OF% = 1: REM text scroll offset (1-based)
 560 BO% = 0: REM brightness wave offset
-570 FC% = 0: REM frame counter for text speed
+570 FC% = 0: REM frame counter
 580 REM
-590 REM --- Display frame ---
+590 REM --- Paint characters (only when text offset changes) ---
 600 FOR C% = 0 TO 23
-610   REM Look up character and write to LED
-620   CH$ = MID$(B$, OF% + C%, 1)
-630   IX% = ASC(CH$) - 32
-640   IF IX% < 0 OR IX% > 94 THEN IX% = 0
-650   BM% = FT%(IX%)
-660   CALL S%(BM%, C%)
-670   REM Set brightness from sine table
-680   SI% = (C% + BO%) AND 63: REM modulo 64
-690   BR% = SN%(SI%)
-700   CALL B%(BR%, C%)
-750 NEXT C%
-760 REM
-770 REM --- Advance brightness every frame, text every 3 frames ---
-780 BO% = (BO% + 1) AND 63
-790 FC% = FC% + 1
-800 IF FC% >= 3 THEN OF% = OF% + 1: FC% = 0
-810 IF OF% > BL% - 23 THEN OF% = 1
-820 REM
-830 GOTO 600
+610   CH$ = MID$(B$, OF% + C%, 1)
+620   IX% = ASC(CH$) - 32
+630   IF IX% < 0 OR IX% > 94 THEN IX% = 0
+640   BM% = FT%(IX%)
+650   CALL S%(BM%, C%)
+660 NEXT C%
+670 REM
+680 REM --- Brightness loop (runs every tick) ---
+690 FOR C% = 0 TO 23
+700   SI% = (C% + BO%) AND 63
+710   BR% = SN%(SI%)
+720   CALL B%(BR%, C%)
+730 NEXT C%
+740 REM
+750 REM --- Advance brightness every tick, text every 4th tick ---
+760 BO% = (BO% + 1) AND 63
+770 FC% = (FC% + 1) AND 3
+780 IF FC% <> 0 THEN 690
+790 OF% = OF% + 1
+800 IF OF% > BL% - 23 THEN OF% = 1
+810 GOTO 600
 840 REM
 845 REM --- MBB_WRITE_LED stub (11 bytes) ---
 846 DATA &HEB, &H7E, &HEB, &H5E, &H23, &H56, &HEB, &HCD, &HD6, &HFD, &HC9
