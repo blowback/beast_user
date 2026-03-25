@@ -221,8 +221,8 @@ in there that we can tweak - this is running at full tilt! The sad truth is that
 BASIC are great for learning how to code and writing simple programs, they squander a lot of the machine's power 
 turning those fancy BASIC statements into machine code that the processor can execute.
 
-To get more performance out this code (and believe me, it can go a **lot** faster!) we'll have to put aside BASIC, 
-and like the bedroom-based game developers of yore teach ourselves z80 assembler...
+To get more performance out of the processor (and believe me, it can go a **lot** faster!) we'll have to put aside BASIC, 
+and like the bedroom-based game developers of yore teach ourselves z80 assembler.
 
 ## Things you can try
 
