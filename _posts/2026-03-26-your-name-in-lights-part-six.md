@@ -5,7 +5,7 @@ categories: [Tutorials]
 tags: [microbeast, nanobeast, slide, ymodem, cpm]
 --- 
 
-[Last time]({% link _posts/2026-03-25-your-name-in-lights-part-ive.md %}), we get a basic scrolltext working 
+[Last time]({% link _posts/2026-03-25-your-name-in-lights-part-five.md %}), we get a basic scrolltext working 
 and were able to scroll any message of our choosing.
 
 We're going to be building on that foundation here, so if you skipped earlier parts or are still a little shaky 
