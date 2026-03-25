@@ -222,7 +222,7 @@ BASIC are great for learning how to code and writing simple programs, they squan
 turning those fancy BASIC statements into machine code that the processor can execute.
 
 To get more performance out of the processor (and believe me, it can go a **lot** faster!) we'll have to put aside BASIC, 
-and like the bedroom-based game developers of yore teach ourselves z80 assembler.
+and like the bedroom-based game developers of yore teach ourselves z80 assembler..
 
 ## Things you can try
 
@@ -235,6 +235,16 @@ table so that the effect is more striking?
 
 That's it for Part Six, and also for MBasic! The good ship Microsoft has taken us as far as she can.
  In the next part we'll learn some z80 assembler, by re-implementing the programs we've already written. 
+
+If you're not quite ready for that yet and want to experiment a bit further in BASIC then by all means do so: experimentation 
+is the best way to learn! I'd recommend upgrading from MBasic to [BBC BASIC](https://www.bbcbasic.co.uk/bbcbasic/z80basic.html) - it has mostly the same syntax but introduces a lot of features that make life a lot easier like multi-line IF statements and PROCedures.
+ It's easier to call machine code in BBC BASIC too, and it has an *excellent* built-in assembler which you could use for the 
+forthcoming articles if you wanted to.
+
+If you want to dabble in other high-level languages you are spoilt for choice...there are CP/M implementations of Algol, COBOL,
+ Fortran, Pascal, LISP, Forth, and C, and probably many more besides. These are easily found on the web, and most will run on 
+the 'Beast without issue (just make sure it's the z80 + cp/m 2.2 version you're trying to run.
+
 Well done for making it this far - the real fun is about to begin!
 
 
