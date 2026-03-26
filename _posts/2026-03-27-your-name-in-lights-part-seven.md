@@ -172,7 +172,7 @@ All being well, you should see this (your string might be different):
 There are so many z80 references on the internet that it's difficult to know where to start. I usually have these open:
 
  - [SJASMPlus reference](https://z00m128.github.io/sjasmplus/documentation.html#po_dup)
- - [z80Heaven instruction set summary](http://z80-heaven.wikidot.com/instructions-set) - the `LD` page is usually my default, 
+ - [z80Heaven instruction set summary](https://z80-heaven.wikidot.com/instructions-set) - the `LD` page is usually my default, 
  and perhaps this image might help you make the most of it:
 
  ![LD instruction](/assets/img/20260327/ld_instr.png)
