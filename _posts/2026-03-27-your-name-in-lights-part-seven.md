@@ -57,8 +57,8 @@ as add and subtract on data. It has some rudimentary relational operators (*is t
 good selection of logical operators (`AND`, `OR`, `XOR`). Data either lives in memory, which is large but relatively slow, or it 
 lives in registers, which are scarce but fast. The z80 has 14 general purpose registers, two index registers, and a handful of 
 other special purpose registers. Much of the fun of z80 programming is keeping as much state in these registers as possible 
-without resorting to slow memory accesses. You'll quickly develop an obsession with minimising the code size of your routines whilst 
-minimising your T-state count (getting them to run as efficiently as possible).
+without resorting to slow memory accesses. You'll quickly develop an obsession with minimising noth the code size of your routines  
+and their T-state count (getting them to run as efficiently as possible).
 
 
 ## Back to BASICs 
@@ -119,7 +119,7 @@ The `INCLUDE "../bios.inc"` line is another directive that tells the assembler t
 contains the addresses of some BIOS routines that we're going to be using across all these examples. I've put them 
 in an include file so that we don't repeat ourselves.
 
-Next we load the 8-bit `B` register with the value 20, and start our main loop. The loop loads the value `0x3fff` into 
+Next we load (`LD`) the 8-bit `B` register with the value 20, and start our main loop. The loop loads the value `0x3fff` into 
 16-bit register pair `HL`, copies `B` into `A` and jumps to the BIOS routine with `CALL MBB_WRITE_LED`, which expects 
 the bitmap in `HL` and the column number in `A`. 
 
@@ -128,9 +128,24 @@ doing here is preserving the value of the 16-bit `BC` register before the call, 
 because we are reliant on our value in `B` being maintained, and we don't know what the BIOS does with the `B` register. In 
 fact the BIOS "clobbers" `B`, so this bit of defensive coding proves prudent.
 
-Once we've done that we increment B with `INC B` and check whether it has reached 24 yet. If not, we go around the loop
+Once we've done that we increment B with `INC B` and check whether it has reached 24 yet (`CP` - compare). If not, we go around the loop
 again. Note that we had to copy `B` into `A` to do the comparison with 24. This is because the `A` register ("A" is for 
-"accumulator") is usually the only one that can take part in arithmetic and logical operations. 
+"accumulator") is usually the only one that can take part in arithmetic and logical operations, and the `CP` compare 
+operation is essentially a subtract: if `A` was 24, the result will be zero and the Zero Flag (`Z`) will be set. If it wasn't 
+24, the zero flag will *not* be set. We can test this in the following *jump relative, if not zero* (`JR NZ`) instruction. There are 
+two different ways that `A` can be not equal to 24: it can be greater than 24, or it can be less than 24. In the latter case, 
+to make the subtraction work we'd have to "borrow" another bit, so the Carry (`C`) flag is set to indicate that the borrow 
+happened, and we can `JP C` to *jump on carry* or `JP NC` to *jump on no carry* if we need to.  Just remember that for *unsigned integers*
+`Z` is equal (`A` == n),  else `C` (carry flag set) is less than (`A` < n), else `NC` (carry flag not set) is greater than (`A` > n).
+Things are a little but fruitier if you're comparing two signed numbers, but that's a wonder for another day.
+
+>And if you find this stuff fascinating consider this: the z80 actually does a subtraction (or a compare) by taking the *two's complement* 
+> of the subtrahend (the number being subtracted) and **adding** that to the minuend (the number being subtracted from). You make a two's 
+> complement by flipping all the bits and then adding 1, which the z80 does by inverting the register and setting the carry IN flag to 1.
+> Then it does an "add with carry". If the result is bigger than 8 bits a *carry out* has occured and the carry flag is set. But the z80 
+> remembers that the operation was originally a subtraction, and a borrow is the opposite of a carry, so the carry flag is flipped, becoming 
+> a 'borrow' bit for the purposes of subtractions and compares. Genius!
+{: .prompt-info }
 
 Once we're finished displaying characters, we `JP P_TERMCPM` which amounts to the same thing as `JP 0x0` or a "jump 
 through zero". This is a common way to exit a custom ("transient") program and return control to CP/M.
