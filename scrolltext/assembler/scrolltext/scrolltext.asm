@@ -7,7 +7,7 @@
 ; Run:   scrolltext.com under CP/M on MicroBeast
 ;
 
-            ORG     100h
+            ORG     0x100
 
             INCLUDE "../bios.inc"
 
@@ -91,7 +91,7 @@ disploop:
             LD      A, (HL)        ; A = character
 
             ; Font lookup
-            SUB     20h
+            SUB     0x20
             CP      95
             JR      C, validchar
             XOR     A              ; invalid -> space (index 0)
@@ -151,7 +151,7 @@ exit:
             JP      P_TERMCPM
 
 ; --- Constants ---
-DELAY_COUNT EQU     8000h          ; tune this for scroll speed
+DELAY_COUNT EQU     0x8000          ; tune this for scroll speed
 
 ; --- Data ---
 prompt:     DB      'Enter scroll text: $'

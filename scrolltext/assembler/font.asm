@@ -28,7 +28,7 @@
 ;
 ; Font table: 16-bit bitmask per character, indexed by ASCII code.
 ; To look up a character:
-;   1. Subtract 20h (space) from ASCII code
+;   1. Subtract 0x20 (space) from ASCII code
 ;   2. Multiply by 2 (each entry is a 16-bit word)
 ;   3. Add to font base address
 ;   4. Read 16-bit word into HL (L=outer segments, H=inner/diagonal)
@@ -36,107 +36,107 @@
 ; Format: .dw value  ; where low byte = outer segments, high byte = inner segments
 ;
 
-INVALID_CHAR_BITMASK    EQU 04861h
+INVALID_CHAR_BITMASK    EQU 0x04861
 
 font:
-                    dw      0000h   ; (space)
-                    dw      4900h   ; !
-                    dw      0202h   ; "
-                    dw      12ceh   ; #
-                    dw      12edh   ; $
-                    dw      2de4h   ; %
-                    dw      0b59h   ; &
-                    dw      0200h   ; '
-                    dw      0c00h   ; (
-                    dw      2100h   ; )
-                    dw      3fc0h   ; *
-                    dw      12c0h   ; +
-                    dw      2000h   ; ,
-                    dw      00c0h   ; -
-                    dw      4000h   ; .
-                    dw      2400h   ; /
+                    dw      0x0000   ; (space)
+                    dw      0x4900   ; !
+                    dw      0x0202   ; "
+                    dw      0x12CE   ; #
+                    dw      0x12ED   ; $
+                    dw      0x2DE4   ; %
+                    dw      0x0B59   ; &
+                    dw      0x0200   ; '
+                    dw      0x0C00   ; (
+                    dw      0x2100   ; )
+                    dw      0x3FC0   ; *
+                    dw      0x12C0   ; +
+                    dw      0x2000   ; ,
+                    dw      0x00C0   ; -
+                    dw      0x4000   ; .
+                    dw      0x2400   ; /
 
-                    dw      243fh   ; 0
-                    dw      0406h   ; 1
-                    dw      00dbh   ; 2
-                    dw      008fh   ; 3
-                    dw      00e6h   ; 4
-                    dw      0869h   ; 5
-                    dw      00fdh   ; 6
-                    dw      1401h   ; 7
-                    dw      00ffh   ; 8
-                    dw      00efh   ; 9
-                    dw      0040h   ; :
-                    dw      2200h   ; ;
-                    dw      0c40h   ; <
-                    dw      00c8h   ; =
-                    dw      2180h   ; >
-                    dw      5083h   ; ?
+                    dw      0x243F   ; 0
+                    dw      0x0406   ; 1
+                    dw      0x00DB   ; 2
+                    dw      0x008F   ; 3
+                    dw      0x00E6   ; 4
+                    dw      0x0869   ; 5
+                    dw      0x00FD   ; 6
+                    dw      0x1401   ; 7
+                    dw      0x00FF   ; 8
+                    dw      0x00EF   ; 9
+                    dw      0x0040   ; :
+                    dw      0x2200   ; ;
+                    dw      0x0C40   ; <
+                    dw      0x00C8   ; =
+                    dw      0x2180   ; >
+                    dw      0x5083   ; ?
 
-                    dw      02bbh   ; @
-                    dw      00f7h   ; A
-                    dw      128fh   ; B
-                    dw      0039h   ; C
-                    dw      120fh   ; D
-                    dw      0079h   ; E
-                    dw      0071h   ; F
-                    dw      00bdh   ; G
-                    dw      00f6h   ; H
-                    dw      1209h   ; I
-                    dw      001eh   ; J
-                    dw      0c70h   ; K
-                    dw      0038h   ; L
-                    dw      0536h   ; M
-                    dw      0936h   ; N
-                    dw      003fh   ; O
+                    dw      0x02BB   ; @
+                    dw      0x00F7   ; A
+                    dw      0x128F   ; B
+                    dw      0x0039   ; C
+                    dw      0x120F   ; D
+                    dw      0x0079   ; E
+                    dw      0x0071   ; F
+                    dw      0x00BD   ; G
+                    dw      0x00F6   ; H
+                    dw      0x1209   ; I
+                    dw      0x001E   ; J
+                    dw      0x0C70   ; K
+                    dw      0x0038   ; L
+                    dw      0x0536   ; M
+                    dw      0x0936   ; N
+                    dw      0x003F   ; O
 
-                    dw      00f3h   ; P
-                    dw      083fh   ; Q
-                    dw      08f3h   ; R
-                    dw      00edh   ; S
-                    dw      1201h   ; T
-                    dw      003eh   ; U
-                    dw      2430h   ; V
-                    dw      2836h   ; W
-                    dw      2d00h   ; X
-                    dw      00eeh   ; Y
-                    dw      2409h   ; Z
-                    dw      0039h   ; [
-                    dw      0900h   ; backslash
-                    dw      000fh   ; ]
-                    dw      2800h   ; ^
-                    dw      0008h   ; _
+                    dw      0x00F3   ; P
+                    dw      0x083F   ; Q
+                    dw      0x08F3   ; R
+                    dw      0x00ED   ; S
+                    dw      0x1201   ; T
+                    dw      0x003E   ; U
+                    dw      0x2430   ; V
+                    dw      0x2836   ; W
+                    dw      0x2D00   ; X
+                    dw      0x00EE   ; Y
+                    dw      0x2409   ; Z
+                    dw      0x0039   ; [
+                    dw      0x0900   ; backslash
+                    dw      0x000F   ; ]
+                    dw      0x2800   ; ^
+                    dw      0x0008   ; _
 
-                    dw      0100h   ; `
-                    dw      208ch   ; a
-                    dw      0878h   ; b
-                    dw      00d8h   ; c
-                    dw      208eh   ; d
-                    dw      2058h   ; e
-                    dw      14c0h   ; f
-                    dw      048eh   ; g
-                    dw      1070h   ; h
-                    dw      1000h   ; i
-                    dw      2210h   ; j
-                    dw      1e00h   ; k
-                    dw      1200h   ; l
-                    dw      10d4h   ; m
-                    dw      1050h   ; n
-                    dw      00dch   ; o
+                    dw      0x0100   ; `
+                    dw      0x208C   ; a
+                    dw      0x0878   ; b
+                    dw      0x00D8   ; c
+                    dw      0x208E   ; d
+                    dw      0x2058   ; e
+                    dw      0x14C0   ; f
+                    dw      0x048E   ; g
+                    dw      0x1070   ; h
+                    dw      0x1000   ; i
+                    dw      0x2210   ; j
+                    dw      0x1E00   ; k
+                    dw      0x1200   ; l
+                    dw      0x10D4   ; m
+                    dw      0x1050   ; n
+                    dw      0x00DC   ; o
 
-                    dw      0170h   ; p
-                    dw      0486h   ; q
-                    dw      0050h   ; r
-                    dw      0888h   ; s
-                    dw      0078h   ; t
-                    dw      001ch   ; u
-                    dw      2010h   ; v
-                    dw      2814h   ; w
-                    dw      2d00h   ; x
-                    dw      028eh   ; y
-                    dw      2048h   ; z
-                    dw      2149h   ; {
-                    dw      1200h   ; |
-                    dw      0c89h   ; }
-                    dw      24c0h   ; ~
-                    dw      0000h   ; DEL
+                    dw      0x0170   ; p
+                    dw      0x0486   ; q
+                    dw      0x0050   ; r
+                    dw      0x0888   ; s
+                    dw      0x0078   ; t
+                    dw      0x001C   ; u
+                    dw      0x2010   ; v
+                    dw      0x2814   ; w
+                    dw      0x2D00   ; x
+                    dw      0x028E   ; y
+                    dw      0x2048   ; z
+                    dw      0x2149   ; {
+                    dw      0x1200   ; |
+                    dw      0x0C89   ; }
+                    dw      0x24C0   ; ~
+                    dw      0x0000   ; DEL

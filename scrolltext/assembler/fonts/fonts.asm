@@ -7,22 +7,22 @@
 ; Run:   fonts.com under CP/M on MicroBeast
 ;
 
-            ORG     100h
+            ORG     0x100
 
             INCLUDE "../bios.inc"
 
 ; --- Display "HELLO" on columns 19-23 ---
 ; For each character:
 ;   1. Get ASCII code
-;   2. Subtract 20h (space) to get font table index
+;   2. Subtract 0x20 (space) to get font table index
 ;   3. Multiply by 2 (each entry is a 16-bit word)
 ;   4. Add font table base address
 ;   5. Load 16-bit bitmask from table into HL
 ;   6. Set A = column number
 ;   7. Call MBB_WRITE_LED
 
-            ; 'H' = 48h, column 19
-            LD      A, 'H' - 20h   ; font index for 'H'
+            ; 'H' = 0x48, column 19
+            LD      A, 'H' - 0x20   ; font index for 'H'
             ADD     A, A            ; multiply by 2 (word size)
             LD      E, A
             LD      D, 0
@@ -35,8 +35,8 @@
             LD      A, 19           ; column 19
             CALL    MBB_WRITE_LED
 
-            ; 'E' = 45h, column 20
-            LD      A, 'E' - 20h
+            ; 'E' = 0x45, column 20
+            LD      A, 'E' - 0x20
             ADD     A, A
             LD      E, A
             LD      D, 0
@@ -49,8 +49,8 @@
             LD      A, 20
             CALL    MBB_WRITE_LED
 
-            ; 'L' = 4Ch, column 21
-            LD      A, 'L' - 20h
+            ; 'L' = 0x4C, column 21
+            LD      A, 'L' - 0x20
             ADD     A, A
             LD      E, A
             LD      D, 0
@@ -63,8 +63,8 @@
             LD      A, 21
             CALL    MBB_WRITE_LED
 
-            ; 'L' = 4Ch, column 22
-            LD      A, 'L' - 20h
+            ; 'L' = 0x4C, column 22
+            LD      A, 'L' - 0x20
             ADD     A, A
             LD      E, A
             LD      D, 0
@@ -77,8 +77,8 @@
             LD      A, 22
             CALL    MBB_WRITE_LED
 
-            ; 'O' = 4Fh, column 23
-            LD      A, 'O' - 20h
+            ; 'O' = 0x4F, column 23
+            LD      A, 'O' - 0x20
             ADD     A, A
             LD      E, A
             LD      D, 0

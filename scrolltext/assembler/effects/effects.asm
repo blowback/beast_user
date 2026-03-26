@@ -7,7 +7,7 @@
 ; Run:   effects.com under CP/M on MicroBeast
 ;
 
-            ORG     100h
+            ORG     0x100
 
             INCLUDE "../bios.inc"
 
@@ -96,7 +96,7 @@ colloop:
             ADD     HL, DE
             LD      A, (HL)        ; ASCII character
 
-            SUB     20h
+            SUB     0x20
             CP      95
             JR      C, validch
             XOR     A
@@ -198,7 +198,7 @@ exit:
             JP      P_TERMCPM
 
 ; --- Constants ---
-DELAY_COUNT EQU     4000h          ; faster than scrolltext (brightness updates more often)
+DELAY_COUNT EQU     0x4000          ; faster than scrolltext (brightness updates more often)
 
 ; --- Data ---
 prompt:     DB      'Enter scroll text: $'

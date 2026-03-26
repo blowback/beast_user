@@ -6,7 +6,7 @@
 ; Run:   strings.com under CP/M on MicroBeast
 ;
 
-            ORG     100h
+            ORG     0x100
 
             INCLUDE "../bios.inc"
 
@@ -49,8 +49,8 @@ disploop:
             ADD     HL, DE         ; HL = address of character
             LD      A, (HL)        ; A = ASCII character
 
-            ; Font lookup: index = (ASCII - 20h) * 2
-            SUB     20h
+            ; Font lookup: index = (ASCII - 0x20) * 2
+            SUB     0x20
             CP      95             ; valid range? (0-94)
             JR      NC, blank      ; invalid char, show blank
             ADD     A, A           ; * 2
@@ -65,7 +65,7 @@ disploop:
             JR      writled
 
 blank:
-            LD      HL, 0000h      ; blank (all segments off)
+            LD      HL, 0x0000      ; blank (all segments off)
 
 writled:
             LD      A, C           ; column number

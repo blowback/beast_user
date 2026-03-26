@@ -6,17 +6,17 @@
 ; Run:   leds.com under CP/M on MicroBeast
 ;
 
-            ORG     100h            ; CP/M .com file starts at 100h
+            ORG     0x100            ; CP/M .com file starts at 0x100
 
             INCLUDE "../bios.inc"
 
-; All 14 segments ON = 3FFFh
+; All 14 segments ON = 0x3FFF
 ; Low byte (L) = FFh = outer segments all on
-; High byte (H) = 3Fh = inner/diagonal segments all on
+; High byte (H) = 0x3F = inner/diagonal segments all on
 
             LD      B, 20          ; start at column 20
 loop:
-            LD      HL, 3FFFh      ; all segments ON
+            LD      HL, 0x3FFF      ; all segments ON
             LD      A, B           ; column number
             PUSH    BC             ; preserve B across BIOS call
             CALL    MBB_WRITE_LED  ; write bitmask to LED
