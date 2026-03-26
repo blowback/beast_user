@@ -18,7 +18,9 @@
 loop:
             LD      HL, 3FFFh      ; all segments ON
             LD      A, B           ; column number
+            PUSH    BC             ; preserve B across BIOS call
             CALL    MBB_WRITE_LED  ; write bitmask to LED
+            POP     BC
 
             INC     B              ; next column
             LD      A, B

@@ -69,7 +69,9 @@ blank:
 
 writled:
             LD      A, C           ; column number
+            PUSH    BC             ; preserve B=length, C=column across BIOS call
             CALL    MBB_WRITE_LED
+            POP     BC
 
             INC     C              ; next column
             JR      disploop

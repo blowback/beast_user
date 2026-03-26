@@ -107,7 +107,9 @@ validchar:
             LD      L, A           ; HL = bitmask
 
             LD      A, C           ; column
+            PUSH    BC             ; preserve C=column across BIOS call
             CALL    MBB_WRITE_LED
+            POP     BC
 
             INC     C
             JR      disploop
