@@ -107,8 +107,6 @@ validch:
             LD      H, (HL)
             LD      L, A           ; HL = bitmask
 
-            POP     BC
-            PUSH    BC
             LD      A, C
             CALL    MBB_WRITE_LED
 
@@ -135,8 +133,6 @@ brightcol:
             ADD     HL, DE
             LD      A, (HL)        ; A = brightness value
 
-            POP     BC
-            PUSH    BC
             LD      B, A           ; save brightness in B
             LD      A, C           ; A = column
             LD      C, B           ; C = brightness
