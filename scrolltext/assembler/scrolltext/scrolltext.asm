@@ -124,7 +124,7 @@ delay:
             JR      NZ, delay
 
 ; --- Check for keypress (BDOS function 11 = console status) ---
-            LD      C, 11
+            LD      C, C_STAT
             CALL    BDOS
             OR      A
             JR      NZ, exit       ; key pressed, exit
@@ -146,7 +146,7 @@ savescroll:
 
 exit:
             ; Read the key to clear it
-            LD      C, 1
+            LD      C, C_READ
             CALL    BDOS
             JP      P_TERMCPM
 
