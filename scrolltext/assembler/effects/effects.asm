@@ -71,25 +71,21 @@ startloop:
             LD      (brightpos), A
             LD      (framecnt), A
 
-; --- Main loop: display frame ---
-mainloop:
-            ; Get window pointer for current scroll position
+; --- Paint characters for current scroll position ---
+painttext:
             LD      HL, (scrollpos)
             LD      DE, padbuf
             ADD     HL, DE
             LD      (winptr), HL
 
-            ; Display 24 characters and set brightness
             LD      C, 0           ; column counter
-
-colloop:
+paintloop:
             LD      A, C
             CP      24
-            JR      Z, coldone
+            JR      Z, brightloop
 
-            PUSH    BC             ; save column counter
+            PUSH    BC
 
-            ; --- Write character bitmask ---
             LD      HL, (winptr)
             LD      E, C
             LD      D, 0
@@ -111,16 +107,23 @@ validch:
             LD      H, (HL)
             LD      L, A           ; HL = bitmask
 
-            POP     BC             ; restore C = column
+            POP     BC
             PUSH    BC
-
             LD      A, C
             CALL    MBB_WRITE_LED
 
-            ; --- Set brightness from sine table ---
-            ; sine index = (column + brightpos) AND 63
-            ; MBB_LED_BRIGHTNESS: A = column, C = brightness
             POP     BC
+            INC     C
+            JR      paintloop
+
+; --- Update brightness every frame ---
+brightloop:
+            LD      C, 0           ; column counter
+brightcol:
+            LD      A, C
+            CP      24
+            JR      Z, brightdone
+
             PUSH    BC
 
             LD      A, (brightpos)
@@ -132,7 +135,7 @@ validch:
             ADD     HL, DE
             LD      A, (HL)        ; A = brightness value
 
-            POP     BC             ; C = column counter
+            POP     BC
             PUSH    BC
             LD      B, A           ; save brightness in B
             LD      A, C           ; A = column
@@ -141,9 +144,9 @@ validch:
 
             POP     BC
             INC     C
-            JR      colloop
+            JR      brightcol
 
-coldone:
+brightdone:
 ; --- Delay ---
             LD      HL, DELAY_COUNT
 delay:
@@ -164,13 +167,12 @@ delay:
             AND     63
             LD      (brightpos), A
 
-; --- Advance text scroll every 3 frames ---
+; --- Advance text scroll every 4th frame ---
             LD      A, (framecnt)
             INC     A
-            CP      3
-            JR      C, noadvance   ; less than 3, don't advance text
-            XOR     A              ; reset frame counter
+            AND     3
             LD      (framecnt), A
+            JR      NZ, brightloop ; no text change, just update brightness
 
             ; Advance scroll position (16-bit)
             LD      HL, (scrollpos)
@@ -185,11 +187,7 @@ nowrap:
             ADD     HL, DE         ; restore scrollpos
 savescroll:
             LD      (scrollpos), HL
-            JP      mainloop
-
-noadvance:
-            LD      (framecnt), A
-            JP      mainloop
+            JP      painttext
 
 exit:
             ; Read key to clear it
