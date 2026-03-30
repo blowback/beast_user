@@ -1,7 +1,8 @@
 ---
 ---
 
-@import "main";
+// do not let autoformatters mess this line up!!
+@use 'main{%- if jekyll.environment == 'production' -%}.bundle{%- endif -%}';
 
 // Z80 / sjasmplus highlighting
 .highlight {
