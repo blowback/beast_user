@@ -17,6 +17,8 @@
 #   ...
 #   ```
 
+require 'rouge'
+
 module Rouge
   module Lexers
     class SjASMPlus < RegexLexer
