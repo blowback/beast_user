@@ -337,7 +337,7 @@ The procedure to run `effects.com` on the 'Beast is similar to what we've used b
 
 All being well, you should see this (your string might be different):
 
-![MBASIC running EFFECTTS.COM](/assets/img/20260325/display_fx_bas.jpg)
+![MBASIC running EFFECTS.COM](/assets/img/20260326/display_fx_bas.jpg)
 
 
 ## Things you can try
