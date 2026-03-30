@@ -58,7 +58,7 @@ exactly what I did.
 
 Here's the code we'll be running this time:
 
-```basic
+```mbasic
 
 10 REM === MicroBeast LED Demo - Step 5: Sine Wave Brightness ===
 20 REM Scrolling text with a sine-wave brightness effect.
@@ -164,7 +164,7 @@ brightness) and also two lookup tables now (one for the "font" and one for our s
 Our character display loop (which starts at line 600) has changed quite a bit. It starts out as before, then at line 
 680 we have:
 
-```basic
+```mbasic
 680 REM --- Brightness loop (runs every tick) ---
 690 FOR C% = 0 TO 23
 700   SI% = (C% + BO%) AND 63
@@ -178,7 +178,7 @@ This goes through every column again, setting a suitable brightness value.
 
 After that, we have this bit of chicanery:
 
-```basic
+```mbasic
 750 REM --- Advance brightness every tick, text every 4th tick ---
 760 BO% = (BO% + 1) AND 63
 770 FC% = (FC% + 1) AND 3

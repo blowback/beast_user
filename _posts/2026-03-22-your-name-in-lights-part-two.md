@@ -122,7 +122,7 @@ The usual approach, it seems, is to `POKE` in a small machine code wrapper that 
 
 The code looks like this:
 
-```BASIC
+```mbasic
 
 10 REM === MicroBeast LED Demo - Step 1: Raw Segment Control ===
 20 REM Turn ON all 14 segments of the last 4 LED positions (columns 20-23)
@@ -162,7 +162,7 @@ the BIOS code in BASIC). So for the time being, ignore lines 10-210 which create
 
 In line 230 we're setting the bitmask variable:
 
-```BASIC
+```mbasic
 BM% = &H3FFF
 ```
 

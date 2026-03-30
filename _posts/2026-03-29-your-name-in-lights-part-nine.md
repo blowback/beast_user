@@ -28,7 +28,7 @@ string into font symbols, and display them on the screen - but this time they'll
 
 Here's the code:
 
-```asm
+```z80
 ; MicroBeast LED Demo - Step 4: Scrolling Text
 ; Scroll user-input text continuously across the 24-character LED display.
 ; Text is padded with 24 spaces on each side so it scrolls in and out.
@@ -207,7 +207,7 @@ to achieve even the simplest task, but remember that each line gets assembled in
 Set up and user string input is exactly the same as before. So is font decoding and character display. There are 
 a couple of bits of extra house keeping that we've added:
 
-```asm
+```z80
             ; Fill padbuf with 303 spaces (24 + 255 + 24)
             LD      HL, padbuf
             LD      BC, 303
@@ -231,7 +231,7 @@ zero then `B` is zero and `C` is zero so "B OR B" must be zero).
 
 Next we plonk the user's string at character 25 onwards:
 
-```asm
+```z80
             ; Copy user text into padbuf+24
             LD      A, (inbuf+1)   ; string length
             OR      A
@@ -267,7 +267,7 @@ twist is that each time we display a string, we start from one character further
 
 Once we've finished a single display iteration, we delay:
 
-```asm
+```z80
 dispdone:
 ; --- Delay loop for scroll speed ---
             LD      HL, DELAY_COUNT
@@ -284,7 +284,7 @@ time checking if the 16-bit `HL` register pair has hit zero.
 
 One final bit of business:
 
-```asm
+```z80
 ; --- Check for keypress (BDOS function 11) ---
             LD      C, C_STAT
             CALL    BDOS
@@ -298,7 +298,7 @@ if we didn't the program would run forever, and the only way to stop it would be
 
 Note that if the user *did* press a key we are duty bound to read it:
 
-```asm
+```z80
 exit:
             ; Read the key to clear it
             LD      C, C_READ

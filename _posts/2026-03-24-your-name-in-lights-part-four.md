@@ -29,7 +29,7 @@ us input the string we want to display dynamically, rather than hard-coding it i
 
 Here's the code we'll be running this time:
 
-```basic
+```mbasic
 
 10 REM === MicroBeast LED Demo - Step 3: String Display ===
 20 REM Prompt user for a string and display it on the 24-char LED display.
@@ -91,7 +91,7 @@ routine in lines 200-260.
 
 We've added some code in lines 170-180 to prompt the user for the string to be displayed:
 
-```basic
+```mbasic
 
 170 INPUT "Enter text (max 24 chars): ", T$
 180 IF LEN(T$) > 24 THEN T$ = LEFT$(T$, 24)
@@ -105,7 +105,7 @@ maximum message size we can display on our 24-character LED display.
 
 There's also some extra chicanery in lines 220-230 that I glossed over earlier that we should now review:
 
-```basic
+```mbasic
 220   IF C% < LEN(T$) THEN IX% = ASC(MID$(T$, C%+1, 1)) - 32 ELSE IX% = 0
 230   IF IX% < 0 OR IX% > 94 THEN IX% = 0
 ```

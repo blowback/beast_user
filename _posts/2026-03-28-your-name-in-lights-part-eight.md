@@ -30,7 +30,7 @@ bitmaps, and then we'll go on to displaying a user-entered string on the LEDs.
 
 Without further ado, let's have a look at the code for doing ASCII to bitmap conversion:
 
-```asm
+```z80
 
 ;
 ; MicroBeast LED Demo - Step 2: Font Rendering
@@ -136,7 +136,7 @@ looping around some common code 5 times with slightly different inputs, we unrol
 It's usually done for speed/efficiency, but here it's just for pedagogic reasons. There's one more file I need to show you, and that's 
 the included `font.asm` table:
 
-```asm
+```z80
 
 ;
 ; Font definition for MicroBeast 14-segment LED displays
@@ -289,7 +289,7 @@ the code.
 
 Now let's look at the first character display code block:
 
-```asm
+```z80
             ; 'H' = 0x48, column 19
             LD      A, 'H' - 0x20   ; font index for 'H'
             ADD     A, A            ; multiply by 2 (word size)
@@ -365,7 +365,7 @@ All being well, you should see this (your string might be different):
 
 Now lets turn our attention to `strings.asm`:
 
-```asm
+```z80
 
 ;
 ; MicroBeast LED Demo - Step 3: String Display

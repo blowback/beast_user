@@ -59,7 +59,7 @@ just going to copy the info from the MicroBeast font table into our own code.
 
 Here's the code we'll be running this time:
 
-```basic
+```mbasic
 
 10 REM === MicroBeast LED Demo - Step 2: Font Rendering ===
 20 REM Display "HELLO" on the last 5 LED positions (columns 19-23)
@@ -129,7 +129,7 @@ either this time: we'll use ASCII characters.
 
 You can see in line 280:
 
-```basic
+```mbasic
 280 H$ = "HELLO"
 ```
 
@@ -139,7 +139,7 @@ remember how long the string is).
 
 In line 220, we have this odd looking line:
 
-```basic
+```mbasic
 220 DIM FT%(94)
 ```
 
@@ -149,7 +149,7 @@ to call this table `FT%` for "Font Table".
 In lines 200-250 you can see where we're setting up values to go in to that table. We loop around 94 times and for each 
 character we're performing:
 
-```basic
+```mbasic
 240  READ FT%(I%)
 ```
 
