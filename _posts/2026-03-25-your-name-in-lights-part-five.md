@@ -54,7 +54,7 @@ In fact, we'll stick another 24 on the front so the string appears to enter from
 
 Here's the code we'll be running this time:
 
-```basic
+```mbasic
 
 10 REM === MicroBeast LED Demo - Step 4: Scrolling Text ===
 20 REM Prompts for a string and scrolls it continuously across the
