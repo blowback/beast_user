@@ -29,7 +29,7 @@ of brightness moving through the string characters!
 
 Here's the code:
 
-```asm
+```z80
 ;
 ; MicroBeast LED Demo - Step 5: Sine Wave Brightness Effect
 ; Scrolling text with a sine-wave brightness pattern that moves
@@ -251,7 +251,7 @@ Again, a hefty slice of code pie, but most of this should look very familiar fro
 the main loop into two sections `paintloop` and `brightloop` to make it easier to follow. The only bit 
 that's new is writing the LED brightness values:
 
-```asm
+```z80
 
 ; --- Update brightness every frame ---
 brightloop:
@@ -288,7 +288,7 @@ which only has 64 entries so we're using `AND 63` to do some modulo arithmetic.
 
 Once we've finished a 'frame' or iteration, we delay and check for a keypress as before, and then we do this:
 
-```asm
+```z80
 ; --- Advance brightness offset every frame ---
             LD      A, (brightpos)
             INC     A
