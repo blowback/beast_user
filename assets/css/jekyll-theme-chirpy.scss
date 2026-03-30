@@ -19,4 +19,11 @@
   .c1  { color: #6a9955; font-style: italic; }
   .cm  { color: #6a9955; font-style: italic; }
   .s   { color: #ce9178; }
+
+  // MBASIC-80 shares most token classes with the Z80 lexer.
+  // The additions below cover anything MBASIC uses differently.
+  // Line numbers — make them dim so they don't compete with code
+  .mi  { color: #858585; }          // integers incl. line numbers
+  // File handles (#1, #2) reuse Name::Variable — already covered by .nl
 }
+
